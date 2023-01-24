@@ -1,0 +1,29 @@
+body,
+html {
+    font-family: Helvetica, sans-serif;
+}
+
+a {
+    font-family: Helvetica, sans-serif;
+    font-size: 25px;
+    margin: 15px;
+
+
+}
+
+a:focus {
+    outline: none !important;
+}
+
+a:hover {
+    text-decoration: none;
+    color: 1266f1;
+}
+
+.container1 {
+    font-weight: 150px;
+    font-weight: bold;
+    color: white;
+    background-color: white;
+
+}

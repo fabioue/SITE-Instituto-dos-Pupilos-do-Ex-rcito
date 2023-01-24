@@ -1,0 +1,17 @@
+.imageEmenta{
+    
+    margin-left: 40px;
+
+}
+.image{
+    margin-left: 300px;
+
+}
+
+.button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: 20px;
+    line-height: inherit;
+    color: black
+}

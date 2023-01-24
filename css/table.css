@@ -1,0 +1,110 @@
+.jumbotron {
+    padding: 1rem 1rem;
+    margin-bottom: 0rem;
+    background-color: #e9ecef;
+    border-radius: .3rem;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+    color: black;
+    background: white;
+}
+
+/* Style buttons */
+.btn {
+    background-color: DodgerBlue;
+    /* Blue background */
+    color: white;
+    /* White text */
+    font-size: 18px;
+    /* Set a font size */
+    cursor: pointer;
+    /* Mouse pointer on hover */
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+    background-color: RoyalBlue;
+}
+
+table th {
+    background: #4A00E0;
+    color: white;
+}
+
+#btnNovo, #btnExcel, #btnCsv, #btnFilter, #btnRelatorio{
+    background-color: white;
+    transition-duration: 0.4s;
+    
+}
+
+#btnRelatorio:hover {
+    background-color: #007bff;
+    color: white;
+}
+  
+#btnFilter:hover {
+    background-color: blueviolet;
+    color: white;
+}
+
+#btnNovo:hover {
+    background-color: #3b93d2;
+    color: white;
+}
+
+#btnCsv:hover {
+    background-color: #838f8d;
+    color: white;
+}
+
+#btnExcel:hover {
+    background-color: #3bd254;
+    color: white;
+}
+
+div.dataTables_length {
+    text-align: left;
+}
+
+button {
+    float: left;
+}
+
+#tabela_info {
+    float: left;
+}
+
+ul.pagination {
+    text-align: right;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+    text-align: right;
+}
+
+div.dataTables_wrapper div.dataTables_paginate {
+    white-space: nowrap;
+    justify-content: flex-end;
+}
+
+#tabela_paginate {
+    float: right;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    border-radius: 30px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 30px;
+}

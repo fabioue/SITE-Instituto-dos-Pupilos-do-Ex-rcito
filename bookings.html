@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script src="https://kit.fontawesome.com/dbd5d83d0a.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="#" />
+    <link rel="shortcut icon" href="#" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/table.css">
+    <title>Marcações</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
+        <div class="container">
+            <div class="container1">
+                <a href="users.html" style="text-decoration:none"><i class="fa-solid fa-users"></i> Utilizadores</a>
+                <a href="bookings.html" style="text-decoration:none"><i class="fa-solid fa-utensils"></i> Marcações</a>
+                <a href="ementa.html" style="text-decoration:none"><i class="fa-solid fa-file-image"></i> Ementa</a>
+                <a class="superadmin" href="logs.html" style="text-decoration:none"><i class="fa-solid fa-list-ul"></i> Registos</a>
+                <a class="superadmin" href="admins.html" style="text-decoration:none"><i class="fa-solid fa-user-gear"></i> Contas</a>
+                <a class="superadmin" href="controlpanel.html" style="text-decoration:none"><i
+                    class="fa-solid fa-gear"></i></a>
+            </div>
+            <img src="img/ipeLogo.png" style="width: 130px;">
+        </div>
+    </nav>
+    <script>
+        var x = sessionStorage.getItem("role");
+        if (x == "admin") {
+            var hide = document.getElementsByClassName("superadmin");
+            for (var i = 0; i < hide.length; i++) {
+                hide[i].style.display = "none";
+            }
+        } else if (x == "superadmin") {
+            var show = document.getElementsByClassName("superadmin");
+            for (var i = 0; i < show.length; i++) {
+                show[i].style.display = "initial";
+            }
+        } else {
+            document.location.href = "index.html"
+        }
+    </script>
+    <center>
+        <div class="container">
+    </center>
+    <center>
+        <div class="container" style="margin-top: 30px;">
+            <div class="">
+                <table id="tabela" class="table table-striped table-bordered" style="width: 100%;">
+                    <thead class="text-center">
+                        <tr>
+                            <th>bookingID</th>
+                            <th>userID</th>
+                            <th>NOME</th>
+                            <th>NIF</th>
+                            <th>DATA</th>
+                            <th>LOCAL</th>
+                            <th>REFEIÇÃO</th>
+                            <th>TIPO</th>
+                            <th>CONSUMIDA</th>
+                            <th>AÇÕES</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </center>
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="filtoDatasModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Filtrar por datas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <table border="0" cellspacing="5" cellpadding="5">
+                            <tbody>
+                                <tr>
+                                    <td>Data minima:</td>
+                                    <td><input type="text" id="min" name="min"></td>
+                                </tr>
+                                <tr>
+                                    <td>Data máxima:</td>
+                                    <td><input type="text" id="max" name="max"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" tabindex="2">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button onclick="logout()" class="btn"
+        style="position: absolute; right: 0; bottom: 0; margin-bottom: 15px; margin-right: 15px;"><i
+            class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button>
+    <script>
+        function logout() {
+            Swal.fire({
+                title: 'Tem a certeza que quer sair?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sair',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.value) {
+                    firebase.auth().signOut()
+                        .then(function () {
+                            document.location.href = "index.html"
+                        })
+                        .catch(function (error) {
+                            alert("Erro");
+                            console.log(error);
+                        });
+                }
+            })
+
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.14.2/dist/sweetalert2.all.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.js"></script>
+
+
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+
+    <script type="text/javascript" src="js/firebase.js"></script>
+    <script type="text/javascript" src="js/bookings.js"></script>
+</body>
+
+</html>
